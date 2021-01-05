@@ -1,6 +1,8 @@
 Fail2ban
 =========
 
+![Test Ansible Role](https://github.com/rbrightling/role-fail2ban/workflows/Test%20Ansible%20Role/badge.svg?branch=main) [![Ansible Galaxy](http://img.shields.io/badge/galaxy-rbrightling.fail2ban-660198.svg?style=flat)](https://galaxy.ansible.com/rbrightling/fail2ban)
+
 Install and configure Fail2ban. Service to scan log files and ban ip addresses which show malicious signs.
 
 **NOTE:** Distributions generally provide a custom jail configuration, which this role leaves in place and provides 
@@ -20,7 +22,7 @@ Supported Distributions:
 Role Variables
 --------------
 
-```
+```yaml
 # defaults file for fail2ban
 # Values set to null are ignored and loaded from default system configuration (if option is present).
 
@@ -232,7 +234,7 @@ None
 Example Playbook
 ----------------
 
-```
+```yaml
 - hosts: servers
   tasks:
     - name: "include fail2ban role"
