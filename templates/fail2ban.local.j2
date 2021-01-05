@@ -1,0 +1,20 @@
+{{ ansible_managed | comment }}
+{% macro fail2ban_conf_format(option, value) -%}
+{% if value is not none %}
+{{ option }} = {{ value }}
+{% endif %}
+{%- endmacro -%}
+# Fail2Ban main configuration file
+#
+# Comments: use '#' for comment lines and ';' (following a space) for inline comments
+#
+
+[Definition]
+
+{{ fail2ban_conf_format("loglevel", fail2ban_log_level | upper) -}}
+{{ fail2ban_conf_format("logtarget", fail2ban_log_target) -}}
+{{ fail2ban_conf_format("syslogsocket", fail2ban_syslog_socket) -}}
+{{ fail2ban_conf_format("socket", fail2ban_socket) -}}
+{{ fail2ban_conf_format("pidfile", fail2ban_pidfile) -}}
+{{ fail2ban_conf_format("dbfile", fail2ban_db_file) -}}
+{{ fail2ban_conf_format("dbpurgeage", fail2ban_db_purge_age) -}}

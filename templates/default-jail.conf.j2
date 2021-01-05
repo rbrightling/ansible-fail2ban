@@ -1,0 +1,12 @@
+{{ ansible_managed | comment }}
+{% import 'macros.j2' as fail2ban_macros %}
+
+{% for section, section_values in _fail2ban_default_jail.items() %}
+{% if section_values is not none %}
+[{{ section }}]
+{% for option, value in section_values.items() %}
+{{ fail2ban_macros.fail2ban_format(option, value) -}}
+{% endfor %}
+
+{% endif %}
+{% endfor %}

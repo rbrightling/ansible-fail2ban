@@ -1,0 +1,19 @@
+{{ ansible_managed | comment }}
+{% import 'macros.j2' as fail2ban_macros %}
+
+[DEFAULT]
+
+{{ fail2ban_macros.fail2ban_format("ignoreself", fail2ban_ignore_self) -}}
+{{ fail2ban_macros.fail2ban_format("ignoreip", fail2ban_ignore_ip) -}}
+{{ fail2ban_macros.fail2ban_format("ignorecommand", fail2ban_ignore_command) -}}
+{{ fail2ban_macros.fail2ban_format("bantime", fail2ban_ban_time) -}}
+{{ fail2ban_macros.fail2ban_format("findtime", fail2ban_find_time) -}}
+{{ fail2ban_macros.fail2ban_format("maxretry", fail2ban_max_retry) -}}
+{{ fail2ban_macros.fail2ban_format("backend", fail2ban_backend) -}}
+{{ fail2ban_macros.fail2ban_format("usedns", fail2ban_use_dns) -}}
+{{ fail2ban_macros.fail2ban_format("logencoding", fail2ban_log_encoding) -}}
+{{ fail2ban_macros.fail2ban_format("enabled", fail2ban_enabled) -}}
+{{ fail2ban_macros.fail2ban_format("mode", fail2ban_mode) -}}
+{{ fail2ban_macros.fail2ban_format("destemail", fail2ban_destemail) -}}
+{{ fail2ban_macros.fail2ban_format("sender", fail2ban_sender) -}}
+{{ fail2ban_macros.fail2ban_format("mta", fail2ban_mta) -}}

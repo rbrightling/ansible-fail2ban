@@ -1,0 +1,13 @@
+{% macro fail2ban_format(option, value) -%}
+{% if value is not none %}
+{% if value is sameas true %}
+{{ option }} = true
+{% elif value is sameas false %}
+{{ option }} = false
+{% elif value is sequence and value is not string %}
+{{ option }} = {{ value | join(',') }}
+{% else %}
+{{ option }} = {{ value }}
+{% endif %}
+{% endif %}
+{%- endmacro -%}

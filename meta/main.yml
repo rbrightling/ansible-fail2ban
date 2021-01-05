@@ -1,0 +1,21 @@
+galaxy_info:
+  role_name: fail2ban
+  author: Robert Brightling
+  description: Install and configure fail2ban.
+
+  license: LGPL-3.0
+
+  min_ansible_version: 2.8
+
+  platforms:
+    - name: EL
+      versions:
+        - 8
+    - name: Debian
+      versions:
+        - buster
+
+  galaxy_tags:
+    - fail2ban
+
+dependencies: []

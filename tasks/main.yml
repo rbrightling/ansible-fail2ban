@@ -1,0 +1,67 @@
+---
+# tasks file for fail2ban
+
+- name: include distro variables
+  include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "{{ ansible_distribution | lower }}.yml"
+        - "{{ ansible_os_family | lower }}.yml"
+        - default.yml
+      paths:
+        - '{{ playbook_dir }}/vars'
+        - '{{ role_path }}/vars'
+
+- name: install fail2ban packages
+  package:
+    name: "{{ fail2ban__packages }}"
+    state: present
+  become: true
+  tags:
+    - install
+
+- name: configure fail2ban
+  template:
+    dest: "/etc/fail2ban/fail2ban.local"
+    src: fail2ban.local.j2
+    owner: root
+    group: root
+    mode: "0644"
+  notify:
+    - restart fail2ban service
+  become: true
+
+- name: configure jail defaults
+  template:
+    dest: "/etc/fail2ban/jail.local"
+    src: jail.local.j2
+    owner: root
+    group: root
+    mode: "0644"
+  notify:
+    - restart fail2ban service
+  become: true
+
+- name: configure jails
+  template:
+    dest: "{{ fail2ban__default_jail_path }}"
+    src: "default-jail.conf.j2"
+    owner: root
+    group: root
+    mode: "0640"
+  notify:
+    - restart fail2ban service
+  become: true
+
+- name: check config
+  command: "{{ fail2ban__server_bin }} --test"
+  changed_when: false
+  become: true
+
+- name: start and enable fail2ban service
+  service:
+    name: fail2ban
+    enabled: true
+    state: started
+  become: true

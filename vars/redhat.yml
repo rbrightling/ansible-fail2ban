@@ -1,0 +1,15 @@
+---
+#RedHat specific variables
+
+fail2ban__packages:
+  - fail2ban
+  - python3-inotify
+  - python3-systemd
+
+fail2ban__default_jail_path: "/etc/fail2ban/jail.d/defaults-redhat.conf"
+
+fail2ban__server_bin: "/usr/bin/fail2ban-server"
+
+fail2ban__jail_sshd:
+  enabled: true
+  backend: "systemd"
